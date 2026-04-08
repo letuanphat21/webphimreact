@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [listPhim, setListPhim] = useState([]);
+
+  useEffect(() => {
+    fetch("https://phimapi.com/danh-sach/phim-moi-cap-nhat?page=1")
+      .then((response) => response.json())
+      .then((data) => setListPhim(data.items));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Danh sách phim mới cập nhật</h1>
+      <ul>
+        {listPhim.map((phim, index) => (
+          <li key={index}>{phim.name}</li>
+        ))}
+      </ul>
     </div>
   );
 }
