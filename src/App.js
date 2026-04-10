@@ -17,7 +17,7 @@ function App() {
       <ul>
         {listPhim.map((phim, index) => (
           <div key={index}>
-            <img src={phim.thumb_url} alt={phim.name} />
+            {/* <img src={phim.thumb_url} alt={phim.name} /> */}
             <li>{phim.name}</li>
           </div>
         ))}
