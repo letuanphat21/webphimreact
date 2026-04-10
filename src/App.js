@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import logo from "./logo.svg";
 import "./App.css";
+import { useEffect, useState } from "react";
 
 function App() {
   const [listPhim, setListPhim] = useState([]);
@@ -7,22 +8,20 @@ function App() {
   useEffect(() => {
     fetch("https://phimapi.com/danh-sach/phim-moi-cap-nhat?page=1")
       .then((response) => response.json())
-      .then((data) => setListPhim(data.items || []))
-      .catch((err) => console.error("Error:", err));
+      .then((data) => setListPhim(data.items));
   }, []);
 
   return (
-    <div className="container">
-      <h1 className="title">🎬 Danh sách phim mới cập nhật</h1>
-
-      <div className="movie-grid">
+    <div>
+      <h1>Danh sách phim mới cập nhật</h1>
+      <ul>
         {listPhim.map((phim, index) => (
-          <div className="movie-card" key={index}>
-            <img className="movie-img" src={phim.thumb_url} alt={phim.name} />
-            <p className="movie-name">{phim.name}</p>
+          <div key={index}>
+            <img src={phim.thumb_url} alt={phim.name} />
+            <li>{phim.name}</li>
           </div>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
